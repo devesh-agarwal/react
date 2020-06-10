@@ -1,0 +1,77 @@
+.MainHeader{
+    font-weight: bold;
+    color: #fff;
+    background: #111;
+    font-size: 18px;
+    margin: 14px -2px;
+    text-align: center;
+  }
+  .mainHeaderImage{
+    display: block;
+    height: 80px;
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+  .mainHeaderImageDiv{
+    text-align: -webkit-center;
+  }
+  .MainHeaderElement{
+    border: 1px solid #fff;
+    background: #c2c2c2;
+  }
+  .SubHeaderLabel{
+    border: solid 1px #fff !important;
+    color: #636363 !important;
+    box-shadow: 0 -3px 4px #000;
+    position: relative;
+    font-weight: bold;
+    height: 100%;
+    margin-right: 0 !important;
+  }
+  
+  label {
+    margin-bottom: 0 !important;
+    height: 100%;
+  }
+
+  .MainHeaderPadding{
+    padding-right: 0 !important;
+  }
+  p{
+    margin-left: 5px;
+    margin-top: 10px;
+  }
+  @media screen and (min-width: 768px) {
+    .SubHeaderDiv{
+      height: 100%;
+   }
+  }
+  
+  .SubHeaderLabelToggle{
+    box-shadow: 0 -3px 4px #000;
+    margin-right: 0 !important;
+    background-color: #fff;
+    background-image: url('https://eatstax.com/static/front/images/delivery/bubbles-blue.png') ;
+    border: solid 1px #fff !important;
+    color: #636363 !important;
+    box-shadow: 0 -3px 4px #000;
+    position: relative;
+    font-weight: bold;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    height: 100%;
+  }
+
+  .headerDiv{
+    background: url(https://eatstax.com/static/front/images/delivery/bg.jpg);
+    
+  }
+  .expandable{
+    margin-left: 23px;
+  }
+
+  .context{
+  font: 1em sans-serif;
+  font-size: 42px;
+  }

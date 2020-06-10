@@ -1,0 +1,63 @@
+.LogoDiv{
+    position: relative;
+    top: -18px;
+    margin-left: 20px;
+    float: left;
+}
+.logo{
+    width: 80px;
+    top: -35px;
+}
+.icon-bar{
+    background-color: inherit;
+    border: 1px solid;
+    display: block;
+    width: 22px;
+    margin-top: 5px;
+}
+
+.sideMenu{
+    float: right;
+    margin: 10px;
+}
+.toolbarLine{
+    position: relative;
+    border: 1px solid;
+    top: 46px;
+    z-index: -1;
+    height: 100%;
+}
+    
+    
+.nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+}
+li {
+    display: inline;
+    font-size: 23px;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+@media screen and (min-width: 600px) {
+   .menuIcon{
+    display: none;
+   }
+   
+.listName{
+      display: block;
+   }
+  }   
+
+
+  @media screen and (max-width: 600px) {
+    .menuIcon{
+     display: block;
+    }
+    
+ .listName{
+       display: none;
+    }
+   }   
+ 

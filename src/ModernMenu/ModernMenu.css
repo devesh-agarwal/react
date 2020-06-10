@@ -1,0 +1,47 @@
+.itemImage{
+    overflow: hidden;
+    max-width: 200px;
+    box-shadow: 2px 1px 4px rgba(0,0,0,.4);
+    padding-left: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ItemDiv{
+    max-width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 15px;
+    margin-top: 10px
+}
+ img{
+  max-width: inherit;
+}
+.amount{
+    float: left;
+    padding-left: 10px;
+}
+.amountButton{
+    max-width: 235px;
+    margin-left: auto;
+    margin-right: auto; 
+}
+.buyButton{
+    float: right;
+}
+.popularMenu{
+    background-color: #58585b;
+    color: #f7ec37;
+    padding: 16px 30px;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+.menuNameClass{
+    color: #58585b;
+
+}
+.description{
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+
+}
