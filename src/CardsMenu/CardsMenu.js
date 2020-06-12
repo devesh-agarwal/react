@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import Items from '../ItemsService'
+import Header from '../Header/Header';
+import './CardsMenu.css';
 
 class Cat extends React.Component {
     render() {
@@ -50,8 +53,57 @@ class Cat extends React.Component {
       );
     }
   }
+class Menu extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = { show: true ,a:0};
+        this.buy = this.buy.bind(this);
+        }
+    selectedItem = React.createRef();
+    itemKey;
+     buy= (e) => {
+       let  b = JSON.parse(e.currentTarget.value).amount;
+        this.setState(() => ({
+            a : this.state.a + b
+        }));
 
+    }
+    listItems = Items.map((ItemsService, i) => (
+    
+        <div className='row ItemDiv' key={i}>
+     
+                <div className='col-md-8'  >
+                    <div className='row description'>
+                        <div className='col-md'>{ItemsService.itemDescription}</div>
+                        <div className='col-md'>{ItemsService.subDescription}</div>
+                    </div>
+                </div>
+                <div className='col-md-4 amountButton'>
+                    <div className='amount'>{ItemsService.amount}</div>
+                    <button className='buyButton btn btn-warning' onClick={this.buy} value={JSON.stringify(Items[i])}  >Buy</button>
+                </div>
+            </div>
+        )
+        )
+    
+        render() {
+            return (
+                <Fragment>
+                    <div className='cardMenu'>
+                    {this.listItems}
+                    {this.state.a}
+                    </div>
+                </Fragment>
+            )
+        }
+    }
 function CardsMenu() {
-    return ( <MouseTracker/>)
+    return (
+        <Fragment> 
+            <Header/>
+            <br/>
+            <Menu/>
+
+    </Fragment>)
 }
 export default CardsMenu;

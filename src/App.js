@@ -21,10 +21,6 @@ function App() {
             </div>
             <br/><br/>
             <br/><br/>
-            <div>
-           <Header/>
-            </div>
-            <br/><br/>
            <Router/>
            </ThemeContext.Provider>
 

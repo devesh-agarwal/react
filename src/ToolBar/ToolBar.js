@@ -3,7 +3,6 @@ import './ToolBar.css';
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Link } from 'react-router-dom';
-import Router from '../Router/Router';
 
 class Logo extends React.Component {
     constructor(props) {
@@ -27,7 +26,7 @@ class Logo extends React.Component {
                 <div className='LogoDiv '>
                     <img src='https://eatstax.com/static/images/61/80bf6f04-efa1-11e6-a0ec-00155d05cd16-alapca-logo.png' className='logo' />
                 </div>
-                <div className='' >
+                <div className='menuIcon' >
                     <div onClick={this.expand} className='sideMenu navbar-toggle'>
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
@@ -40,6 +39,7 @@ class Logo extends React.Component {
                 <Navigation classs ='listName'/>
                 <div>
                     <hr className='toolbarLine' /></div>
+
             </Fragment>
 
         );
