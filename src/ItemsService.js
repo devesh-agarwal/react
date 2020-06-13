@@ -37,15 +37,36 @@ const Items = [
     }
 ];
 
-export function ItemUrl() {
-
-  const  listItems = Items.map((ItemsService) =>
-  <ul>
-    <li key={ItemsService}><img src={ItemsService.url}/></li>
-    <li  key={ItemsService.toString()}>{ItemsService.itemDescription}</li>
-    </ul>
-    )
-    return  (  listItems)
-}
-
+export const tableData = [
+    {
+        leftSide: 'Monday',
+        rightSide: '11:00 AM TO 9:00 PM',
+    },
+    {
+        leftSide: 'Tuesday',
+        rightSide: '11:00 AM TO 9:00 PM',
+    },
+    {
+        leftSide: 'Wednesday',
+        rightSide: '11:00 AM TO 9:00 PM',
+    },{
+        leftSide: 'Thursday',
+        rightSide: '11:00 AM TO 9:00 PM',
+    },{
+        leftSide: 'Friday',
+        rightSide: '11:00 AM TO 9:00 PM',
+    },{
+        leftSide: 'Saturday',
+        rightSide: '11:00 AM TO 9:00 PM',
+    },{
+        leftSide: 'Sunday',
+        rightSide: '11:00 AM TO 9:00 PM',
+    },
+    {
+        leftSide: 'General Minimum Order',
+        rightSide: 'No minimum order applied',
+    },{
+        leftSide: 'Delivery Minimum Order',
+        rightSide: '15',
+    }];
 export default Items;

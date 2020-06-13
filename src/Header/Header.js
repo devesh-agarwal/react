@@ -1,27 +1,30 @@
-import React, { Fragment,useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import './Header.css';
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import {ThemeContext} from '../App';    
-function MainHeader() {
-    const element = 
-     <div className='col-md-4 MainHeaderPadding headerDiv'>
-        <div className='MainHeaderElement'>
-            <div className='MainHeader'>
-<p>{console.log(ThemeContext)}We are closed</p>
-            </div>
-            <div className='mainHeaderImageDiv'>
-                <img src='https://eatstax.com/static/front/images/delivery/closed.svg' className='mainHeaderImage' />
+import { ThemeContext } from '../App';
+
+class MainHeader extends React.Component {
+    element =
+        <div className='col-md-4 MainHeaderPadding headerDiv'>
+            <div className='MainHeaderElement'>
+                <div className='MainHeader'>
+                    <p>{console.log(ThemeContext)}We are closed</p>
+                </div>
+                <div className='mainHeaderImageDiv'>
+                    <img src='https://eatstax.com/static/front/images/delivery/closed.svg' className='mainHeaderImage' />
+                </div>
             </div>
         </div>
-        </div>
-    return element;
+    render() {
+        return element;
+    }
 }
 
 class ExpandCurbSide extends React.Component {
-        constructor(props) {
+    constructor(props) {
         super(props);
-        this.submit = this.submit.bind(this);    
+        this.submit = this.submit.bind(this);
     }
 
     pickupName = React.createRef();
@@ -37,10 +40,10 @@ class ExpandCurbSide extends React.Component {
             <Fragment>
                 <h3 >CurbSide</h3>
                 <form onSubmit={this.submit}>
-                <input className="form-control" aria-label="With textarea"  placeholder='PickUp Name' type= 'text' ref={this.pickupName} onChange={this.submit}/>
-                <input style={{marginTop :'3px'}} className="form-control" aria-label="With textarea" placeholder='Vehicle' type= 'text' ref={this.vehicle} onChange={this.submit}/>               
+                    <input className="form-control" aria-label="With textarea" placeholder='PickUp Name' type='text' ref={this.pickupName} onChange={this.submit} />
+                    <input style={{ marginTop: '3px' }} className="form-control" aria-label="With textarea" placeholder='Vehicle' type='text' ref={this.vehicle} onChange={this.submit} />
                 </form>
-        
+
             </Fragment>
         )
     }
@@ -53,17 +56,17 @@ class ExpandDelivery extends React.Component {
     }
 
     address = React.createRef();
-     submit(event) {
-         console.log(this.address.current.value);
-         event.preventDefault();
-     }
+    submit(event) {
+        console.log(this.address.current.value);
+        event.preventDefault();
+    }
     render() {
-              return (
+        return (
             <Fragment>
                 <form onSubmit={this.submit}>
-              <h3 className={ThemeContext._currentValue}>Delivery{console.log(ThemeContext)}  </h3>
-                <textarea className="form-control" aria-label="With textarea" placeholder='Address' type= 'text' ref={this.address} onChange={this.submit}></textarea>
-                </form>    
+                    <h3 className={ThemeContext._currentValue}>Delivery{console.log(ThemeContext)}  </h3>
+                    <textarea className="form-control" aria-label="With textarea" placeholder='Address' type='text' ref={this.address} onChange={this.submit}></textarea>
+                </form>
             </Fragment>
         )
     }
@@ -95,7 +98,7 @@ function SubHeader() {
             super(props);
             this.state = { a: 'SubHeaderLabel col', b: 'SubHeaderLabel col', c: 'SubHeaderLabel col', expand: 'abc' };
             this.handleClick = this.handleClick.bind(this);
-            
+
         }
 
         handleClick(event) {
@@ -123,33 +126,32 @@ function SubHeader() {
             }
 
         }
-
         render() {
             return (
                 <Fragment>
-                    <div  className='col-md-8'>
+                    <div className='col-md-8'>
                         <div className='row SubHeaderDiv headerDiv' >
-                        <label className='noMargin'>
-                            <div id='a' onClick={(e) => this.handleClick(e)} className={this.state.a}>
-                                <p>Takeout</p>
-                                <img src="https://eatstax.com/static/front/images/delivery/Take_away.png" />
-                            </div>
-                        </label>
-                        <label>
-                            <div onClick={this.handleClick} id='b' className={this.state.b}>
-                                <p>Curbside</p>
-                                <img src="https://eatstax.com/static/front/images/delivery/Curb_Side.png" />
-                            </div>
-                        </label>
-                        <label>
-                            <div onClick={this.handleClick} id='c' className={this.state.c}>
-                                <p>Delivery</p>
-                                <img src="https://eatstax.com/static/front/images/delivery/Delivery.png" />
-                            </div>
-                        </label>
-                    </div>
-                    </div>  
-                    <Expandable  expand ={this.state.expand}/>
+                            <label className='noMargin'>
+                                <div id='a' onClick={this.handleClick} className={this.state.a}>
+                                    <p>Takeout</p>
+                                    <img src="https://eatstax.com/static/front/images/delivery/Take_away.png" />
+                                </div>
+                            </label>
+                            <label>
+                                <div onClick={this.handleClick} id='b' className={this.state.b}>
+                                    <p>Curbside</p>
+                                    <img src="https://eatstax.com/static/front/images/delivery/Curb_Side.png" />
+                                </div>
+                            </label>
+                            <label>
+                                <div onClick={this.handleClick} id='c' className={this.state.c}>
+                                    <p>Delivery</p>
+                                    <img src="https://eatstax.com/static/front/images/delivery/Delivery.png" />
+                                </div>
+                            </label>
+                        </div>
+                    </div> {console.log(window.screen)}
+                    <Expandable expand={this.state.expand} />
                 </Fragment>
             );
         }
@@ -164,10 +166,10 @@ function Header() {
     let expand = 'delivery';
     return (
         <Fragment>
-        <div className='row marginZero '>
-          <MainHeader />
-          <SubHeader />
-        </div>
+            <div className='row marginZero '>
+                <MainHeader />
+                <SubHeader />
+            </div>
         </Fragment>
     )
 }

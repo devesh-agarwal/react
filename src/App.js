@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Header from './Header/Header';
 import ToolBar from './ToolBar/ToolBar';
 import Router from './Router/Router';
-
+import {CommonAbout} from './About/About';
  export const ThemeContext = React.createContext('light');
 function App() {
 
@@ -23,7 +23,8 @@ function App() {
             <br/><br/>
            <Router/>
            </ThemeContext.Provider>
-
+           <br/>
+            <CommonAbout />
         </Fragment>
     )
 }

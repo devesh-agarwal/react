@@ -3,6 +3,7 @@ import './ToolBar.css';
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Link } from 'react-router-dom';
+import Snackbar from '@material-ui/core/Snackbar';
 
 class Logo extends React.Component {
     constructor(props) {

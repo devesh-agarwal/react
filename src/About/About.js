@@ -1,19 +1,17 @@
 import React, { Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import { tableData } from '../ItemsService';    
+import './About.css';
 function About() {
-    const ele = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',];
-    const list = ele.map((ser,i) => (
-        <div key={i}>
-        <Table style={{width:'100%'}} >
+    const list = tableData.map((data, i) => (
+        <table className='table' style={{ width: '100%' }} key={i}>
             <tbody >
-                <tr  >
-                    <td style={{border: '1px solid', textAlign:"center"}}>{ser}</td>
-                    <td style={{border: '1px solid', textAlign:"center"}}>{ser}</td>
+                <tr className='row' >
+                    <td className='col' style={{ textAlign: 'right' }}>{data.leftSide}</td>
+                    <td className='col' >{data.rightSide}</td>
                 </tr>
             </tbody>
-        </Table>
-    </div>
+        </table>
     ))
     const element = (
         <div style={{ textAlign: 'center' }}>
@@ -25,19 +23,45 @@ function About() {
                     <path fillRule="evenodd" d="M2 7.846V7H1v.437c.291.207.632.35 1 .409zm-1 .737c.311.14.647.232 1 .271V15H1V8.583zm13 .271a3.354 3.354 0 0 0 1-.27V15h-1V8.854zm1-1.417c-.291.207-.632.35-1 .409V7h1v.437zM3 9.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5V15H7v-5H4v5H3V9.5zm6 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-4zm1 .5v3h2v-3h-2z" />
                 </svg>
             Alpaca Cary
-            <img src="https://eatstax.com/static/images/61/80bf6f04-efa1-11e6-a0ec-00155d05cd16-alapca-logo.png" style={{ width: 75, top: -35, maxWidth: 80 }} />
+            <img src="https://eatstax.com/static/images/61/80bf6f04-efa1-11e6-a0ec-00155d05cd16-alapca-logo.png" style={{ width: 75, marginLeft: '8px', maxWidth: 80 }} />
             </h1>
+            <br />
             <h3>
                 <svg className="bi bi-geo-alt" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                 </svg> 9575 Chapel Hill Road, Morrisville, NC 27560</h3>
+
         </div>
     );
     return (
         <Fragment>
             {element}
+            <br />
             {list}
+            
+            
         </Fragment>);
 
+}
+export function CommonAbout() {
+    const element = (
+        <div style={{textAlign:'center', padding:'5px 20px 20px 20px', border:' 1px solid #ddd'}}>
+            <h3>
+                About Alpaca Chicken
+        </h3>
+            <p style={{margin: '0 0 10px'}}>
+                Alpaca Peruvian Charcoal Chicken is recognized for its unforgettable rotisserie chicken,
+                cooked in a special marinade, then roasted in our imported oven. This oven uses natural
+                wood charcoal and is the source of the mouth watering smells as you approach the restaurant.
+                We pair our chicken with traditional South American sides – from plantains to yuca fries or
+                black beans. Our all natural chickens are hormone free, local and free of all major FDA allergies
+                (peanuts, tree nuts, eggs, fish, shellfish, milk, soy and gluten).
+                Alpaca Peruvian Charcoal Chicken also does take-out as well as large parties and catering.
+
+        </p>
+        <p>© 2020 Alpaca Chicken. Made in NC</p>
+        </div>
+    )
+    return element
 }
 export default About;
