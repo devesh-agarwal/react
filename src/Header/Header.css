@@ -84,3 +84,10 @@
        display: none;
     }
    }   
+.snackbar{
+  background-color:darkgreen;
+  margin: 7px;
+  padding: 10px;
+  color: #fff;
+  border-radius: 15px;
+}

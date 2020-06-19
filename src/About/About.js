@@ -45,7 +45,7 @@ function About() {
 }
 export function CommonAbout() {
     const element = (
-        <div style={{textAlign:'center', padding:'5px 20px 20px 20px', border:' 1px solid #ddd'}}>
+        <div style={{textAlign:'center', padding:'5px 20px 20px 20px', border:' 1px solid #ddd', boxShadow: '0 -1px 25px grey', margin: '15px'}}>
             <h3>
                 About Alpaca Chicken
         </h3>
