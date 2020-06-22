@@ -6,6 +6,7 @@ import Header from './Header/Header';
 import ToolBar from './ToolBar/ToolBar';
 import Router from './Router/Router';
 import {CommonAbout} from './About/About';
+
  export const ThemeContext = React.createContext('light');
 function App() {
 
@@ -13,12 +14,7 @@ function App() {
     return (
         <Fragment>
             <ThemeContext.Provider value="context">
-
-            <div>
-
-                <ToolBar/>
-         
-            </div>
+                <ToolBar/>   
             <br/><br/>
             <br/><br/>
            <Router/>

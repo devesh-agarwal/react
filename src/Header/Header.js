@@ -42,7 +42,7 @@ class ExpandCurbSide extends React.Component {
     render() {
         return (
             <Fragment>
-                <h3 >CurbSide</h3>
+                <h3>CurbSide</h3>
                 <form onSubmit={this.submit}>
                     <input className="form-control" aria-label="With textarea" placeholder='PickUp Name' type='text' ref={this.pickupName} onChange={this.submit} />
                     <input style={{ marginTop: '3px' }} className="form-control" aria-label="With textarea" placeholder='Vehicle' type='text' ref={this.vehicle} onChange={this.submit} />
@@ -97,17 +97,10 @@ function Expandable(props) {
 class SubHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isActive: 'none', a: 'SubHeaderLabel col', b: 'SubHeaderLabel col', c: 'SubHeaderLabel col', expand: 'abc' };
+        this.state = { isActive: 'none', a: 'SubHeaderLabel col', b: 'SubHeaderLabel col', c: 'SubHeaderLabel col', expand: '', openSanckbarr: false };
         this.handleClick = this.handleClick.bind(this);
     }
-
-    openSnackBar() {
-        this.setState({ isActive: 'block' }, () => {
-            setTimeout(() => {
-                this.setState({ isActive: 'none' });
-            }, 3000);
-        });
-    }
+    portal = <Port />
     handleClick(event) {
         this.setState(() => ({
             a: 'SubHeaderLabel col',
@@ -118,39 +111,39 @@ class SubHeader extends React.Component {
         if (event.currentTarget.id === 'a') {
             this.setState(() => ({
                 a: 'SubHeaderLabelToggle col',
-                expand: 'take away'
+                expand: 'take away',
+                openSanckbarr: true
             }));
         } if (event.currentTarget.id === 'b') {
             this.setState(() => ({
                 b: 'SubHeaderLabelToggle col',
-                expand: 'curbside'
+                expand: 'curbside',
+                openSanckbarr: true
             }));
+
         } if (event.currentTarget.id === 'c') {
             this.setState(() => ({
                 c: 'SubHeaderLabelToggle col',
-                expand: 'delivery'
+                expand: 'delivery',
+                openSanckbarr: true
             }));
         }
     }
     render() {
-        const oneq = this.props.backgroun;
+        let sanckbarr = null;
+        const expand = this.state.expand;
+        if (this.state.openSanckbarr) {
+            sanckbarr = <SnackBarr expand={expand} />
+        };
         return (
             <Fragment>
-                <Portal node={document && document.getElementById('snackbar')}>
-                    <div className='snackbar'><span>Order Type updated <svg style={{ top: -3,position: 'relative'}} className="bi bi-bag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                        <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                    </svg>.</span><br /> Order type is successfully changed to {this.state.expand}.
-                    </div>
-                </Portal>
+                {sanckbarr}
                 <div className='col-md-8'>
-                    {console.log(oneq)}
-                    <div className='row SubHeaderDiv headerDiv'  >
+                    <div className='row SubHeaderDiv headerDiv'>
                         <label className='noMargin'>
-
                             <div id='a' onClick={this.handleClick} className={this.state.a}>
                                 <p>Takeout</p>
-                                <img src="https://eatstax.com/static/front/images/delivery/Take_away.png" />
+                                <img onClick={Port} src="https://eatstax.com/static/front/images/delivery/Take_away.png" />
                             </div>
                         </label>
                         <label>
@@ -166,14 +159,23 @@ class SubHeader extends React.Component {
                             </div>
                         </label>
                     </div>
-                </div> {console.log(window.screen)}
+                </div>
                 <Expandable expand={this.state.expand} />
             </Fragment>
         );
     }
 }
 
-
+function SnackBarr(props) {
+    const element = <Portal closeOnEsc={true} closeOnOutsideClick node={document.getElementById('snackbar')}>
+        <div className='snackbar'><span>Order Type updated <svg style={{ top: -3, position: 'relative' }} className="bi bi-bag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
+            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
+        </svg>.</span><br /> Order type is successfully changed to {props.expand}.<br />
+        </div>
+    </Portal>
+    return element;
+}
 const HigherOrderComponent = (SubHeader) => {
     class HOC extends React.Component {
         render() {
@@ -219,18 +221,13 @@ function Port() {
     const element = <div id='snackbar'>
         <PortalWithState closeOnOutsideClick closeOnEsc>
             {({ openPortal, closePortal, isOpen, portal }) => (
-                <React.Fragment>
+                <Fragment>
                     <button onClick={openPortal}>
                         Open Portal
                     </button>
                     {portal(
-                        <p>
-                            This is more advanced Portal. It handles its own state.{' '}
-                            <button onClick={closePortal}>Close me!</button>, hit ESC or
-                           click outside of me.
-                        </p>
-                    )}
-                </React.Fragment>
+                        <SnackBarr expand='eff' />)}
+                </Fragment>
             )}
         </PortalWithState>
     </div>
@@ -250,8 +247,8 @@ function Header() {
         <Fragment>
             {expand}
             {/* <Port /> */}
-            <div id='snackbar' ></div>
-            <div className='row marginZero ' >
+            <div id='snackbar'></div>
+            <div className='row marginZero '>
                 <MainHeader />
                 <SubHeader backgroun={oneq} />
                 {/* {HigherOrderComponent()} */}

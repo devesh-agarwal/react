@@ -1,13 +1,10 @@
-import { BrowserRouter, Switch,  } from 'react-router-dom';
-
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import React, { Suspense, lazy } from 'react';
+const ModernMenu = lazy(() => import('../ModernMenu/ModernMenu'));
+const CardsMenu = lazy(() => import('../CardsMenu/CardsMenu'));
+const StandardMenu = lazy(() => import('../StandardMenu/StandardMenu'));
+const About = lazy(() => import('../About/About'));
 
-import Header from '../Header/Header';
-import ModernMenu from '../ModernMenu/ModernMenu'
-import CardsMenu from '../CardsMenu/CardsMenu';
-import About from '../About/About'
-import StandardMenu from '../StandardMenu/StandardMenu'
-import {Route} from 'react-router';
 function Router() {
     const element = (
         <BrowserRouter>
@@ -15,7 +12,6 @@ function Router() {
             <Switch>
 
                 <Route exact path="/" component={CardsMenu} />
-                <Route  path='/Header' component={Header} />
                 <Route  path='/modern-menu' component={ModernMenu} />
                 <Route   path="/cards-menu" component={CardsMenu} />
                 <Route   path="/standard-menu" component={StandardMenu} />

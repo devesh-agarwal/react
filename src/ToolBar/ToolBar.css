@@ -40,7 +40,7 @@ li {
     padding: 14px 16px;
     text-decoration: none;
   }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 725px) {
    .menuIcon{
     display: none;
    }
@@ -51,7 +51,7 @@ li {
   }   
 
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 725px) {
     .menuIcon{
      display: block;
     }

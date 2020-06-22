@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import './ModernMenu.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Items from '../ItemsService'
-import Header from '../Header/Header';
 import { PortalWithState } from 'react-portal';
+import  Header  from '../Header/Header';
 
 export class ItemList extends React.Component {
     constructor(props) {
@@ -112,25 +112,25 @@ class Menu extends React.Component {
     }
 }
 
-function Port(){
+function Port() {
     const element =
-<PortalWithState closeOnOutsideClick closeOnEsc>
-  {({ openPortal, closePortal, isOpen, portal }) => (
-    <React.Fragment>
-      <button onClick={openPortal}>
-        Open Portal
+        <PortalWithState closeOnOutsideClick closeOnEsc>
+            {({ openPortal, closePortal, isOpen, portal }) => (
+                <React.Fragment>
+                    <button onClick={openPortal}>
+                        Open Portal
       </button>
-      {portal(
-        <p>
-          This is more advanced Portal. It handles its own state.{' '}
-          <button onClick={closePortal}>Close me!</button>, hit ESC or
+                    {portal(
+                        <p>
+                            This is more advanced Portal. It handles its own state.{' '}
+                            <button onClick={closePortal}>Close me!</button>, hit ESC or
           click outside of me.
         </p>
-      )}
-    </React.Fragment>
-  )}
-</PortalWithState>
-return element
+                    )}
+                </React.Fragment>
+            )}
+        </PortalWithState>
+    return element
 }
 
 
@@ -139,8 +139,7 @@ function ModernMenu() {
 
     return (
         <Fragment>
-            <Header/>
-            
+            <Header />
             <ThemeContext.Provider >
                 <React.StrictMode>
                     <Menu id='modal-root' name='Popular Menu' itemName={Items} />
