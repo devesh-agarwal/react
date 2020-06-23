@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState, useEffect } from 'react';
 import './Header.css';
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -97,53 +97,48 @@ function Expandable(props) {
 class SubHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {error: null, isActive: 'none', a: 'SubHeaderLabel col', b: 'SubHeaderLabel col', c: 'SubHeaderLabel col', expand: '', openSanckbarr: false };
+        this.state = { error: null, isActive: 'none', a: 'SubHeaderLabel col', b: 'SubHeaderLabel col', 
+                       c: 'SubHeaderLabel col', expand: '', sanckbarr : null };
         this.handleClick = this.handleClick.bind(this);
     }
     portal = <Port />
     handleClick(event) {
-        try {
-
         this.setState(() => ({
             a: 'SubHeaderLabel col  ',
             b: 'SubHeaderLabel col',
             c: 'SubHeaderLabel col',
-            expand: 'take away'
+            expand: 'take away',
+
         }));
         if (event.currentTarget.id === 'a') {
-            this.setState(() => ({
+            this.setState( {
                 a: 'SubHeaderLabelToggle col',
                 expand: 'take away',
-                openSanckbarr: true
-            }));
+                sanckbarr : <SnackBarr expand='take away' />
+            });
         } if (event.currentTarget.id === 'b') {
-            this.setState(() => ({
+            this.setState({
                 b: 'SubHeaderLabelToggle col',
                 expand: 'curbside',
-                openSanckbarr: true
-            }));
+                sanckbarr : <SnackBarr expand='Curbside' />
+            });
 
         } if (event.currentTarget.id === 'c') {
-            this.setState(() => ({
+            this.setState( {
                 c: 'SubHeaderLabelToggle col',
                 expand: 'delivery',
-                openSanckbarr: true
-            }));
+                sanckbarr : <SnackBarr expand='Take away' />
+            });
         }
-        } catch (error) {
-            this.setState({ error });
-            console.log(error)
-          }
+        setTimeout(()=>{
+            this.setState( {sanckbarr: null}  )}, 2000)
         }
+        componentDidUpdate() {
+                                }
     render() {
-        let sanckbarr = null;
-        const expand = this.state.expand;
-        if (this.state.openSanckbarr) {
-            sanckbarr = <SnackBarr expand={expand} />
-        };
         return (
             <Fragment>
-                {sanckbarr}
+                {this.state.sanckbarr}
                 <div className='col-md-8'>
                     <div className='row SubHeaderDiv headerDiv'>
                         <label className='noMargin'>
@@ -239,58 +234,78 @@ function Port() {
     </div>
     return element;
 }
-class ErrorBoundary extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { hasError: false };
-    }
+// class ErrorBoundary extends React.Component {
+//     constructor(props) {
+//       super(props);
+//       this.state = { hasError: false };
+//     }
   
-    static getDerivedStateFromError(error) {
-      // Update state so the next render will show the fallback UI.
-      console.log(error);
-      console.log(this.state.hasError);
+//     static getDerivedStateFromError(error) {
+//       // Update state so the next render will show the fallback UI.
+//       console.log(error);
+//       console.log(this.state.hasError);
 
-      return { hasError: true };
-    }
+//       return { hasError: true };
+//     }
   
-    componentDidCatch(error, errorInfo) {
-      // You can also log the error to an error reporting service
-      console.log(error, errorInfo);
-      console.log('fgdfg');
-    }
+//     componentDidCatch(error, errorInfo) {
+//       // You can also log the error to an error reporting service
+//       console.log(error, errorInfo);
+//       console.log('fgdfg');
+//     }
   
-    render() {
-      if (this.state.hasError) {
-        // You can render any custom fallback UI
-        return <h1>Something went wrong.</h1>;
-      }
+//     render() {
+//       if (this.state.hasError) {
+//         // You can render any custom fallback UI
+//         return <h1>Something went wrong.</h1>;
+//       }
   
-      return this.props.children; 
+//       return this.props.children; 
+//     }
+//   }
+  function Example(props) {
+    const [count, setCount] = useState(3);
+    const [count1, setCount1] = useState(null);
+    const [count2, setCount2] = useState([{ text: 'Learn Hooks' }]);
+function  opena() {
+    if(true){
+        setCount1(<SnackBarr expand='fdgdfg' />);
     }
   }
-
+  useEffect(() => {
+    setTimeout(()=>{ setCount1(null)}, 3000);   
+  });
+     return (
+      <div>
+        <p>You clicked {count} times</p>
+        <p>You clicked {count1} times</p>
+        <p>You clicked {count2.text} times</p>
+        <button onClick={opena}>
+          Click me
+        </button>
+      </div>
+    );
+  }
 function Header() {
-    let expand = 'null';
+    let picture = 'null';
     let oneq = 'headerDiv'
     if (window.screen.availWidth >= 760) {
-        expand = <div style={{ overflow: 'hidden' }}>
+        picture = <div style={{ overflow: 'hidden' }}>
             <img style={{ width: '100%' }} src='https://www.rd.com/wp-content/uploads/2018/12/shutterstock_1161597079.jpg' />
         </div>
-    } else expand = null;
+    } else picture = null;
     return (
         <Fragment>
-            {expand}
+            {picture}
             {/* <Port /> */}
             <div id='snackbar'></div>
-            <ErrorBoundary>
             <div className='row marginZero '>
                 <MainHeader />
                 <SubHeader backgroun={oneq} />
                 {/* {HigherOrderComponent()} */}
-   
+   {/* <Example/> */}
          </div>
   
-</ErrorBoundary>
         </Fragment>
     )
 }
