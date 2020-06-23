@@ -15,7 +15,7 @@ class MainHeader extends React.Component {
                     <p>{console.log(ThemeContext)}We are closed</p>
                 </div>
                 <div className='mainHeaderImageDiv'>
-                    <img src='https://eatstax.com/static/front/images/delivery/closed.svg' className='mainHeaderImage' />
+                    <img src='https://eatstax.com/static/front/images/delivery/closed.svg' className='mainHeaderImage' alt='Closed Icon' />
                 </div>
             </div>
         </div>
@@ -97,13 +97,15 @@ function Expandable(props) {
 class SubHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isActive: 'none', a: 'SubHeaderLabel col', b: 'SubHeaderLabel col', c: 'SubHeaderLabel col', expand: '', openSanckbarr: false };
+        this.state = {error: null, isActive: 'none', a: 'SubHeaderLabel col', b: 'SubHeaderLabel col', c: 'SubHeaderLabel col', expand: '', openSanckbarr: false };
         this.handleClick = this.handleClick.bind(this);
     }
     portal = <Port />
     handleClick(event) {
+        try {
+
         this.setState(() => ({
-            a: 'SubHeaderLabel col',
+            a: 'SubHeaderLabel col  ',
             b: 'SubHeaderLabel col',
             c: 'SubHeaderLabel col',
             expand: 'take away'
@@ -128,7 +130,11 @@ class SubHeader extends React.Component {
                 openSanckbarr: true
             }));
         }
-    }
+        } catch (error) {
+            this.setState({ error });
+            console.log(error)
+          }
+        }
     render() {
         let sanckbarr = null;
         const expand = this.state.expand;
@@ -143,19 +149,19 @@ class SubHeader extends React.Component {
                         <label className='noMargin'>
                             <div id='a' onClick={this.handleClick} className={this.state.a}>
                                 <p>Takeout</p>
-                                <img onClick={Port} src="https://eatstax.com/static/front/images/delivery/Take_away.png" />
+                                <img onClick={Port} src="https://eatstax.com/static/front/images/delivery/Take_away.png" alt='Food packet Icon'/>
                             </div>
                         </label>
                         <label>
                             <div onClick={this.handleClick} id='b' className={this.state.b}>
                                 <p>Curbside</p>
-                                <img src="https://eatstax.com/static/front/images/delivery/Curb_Side.png" />
+                                <img src="https://eatstax.com/static/front/images/delivery/Curb_Side.png" alt='Curbside Icon' />
                             </div>
                         </label>
                         <label>
                             <div onClick={this.handleClick} id='c' className={this.state.c}>
                                 <p>Delivery</p>
-                                <img src="https://eatstax.com/static/front/images/delivery/Delivery.png" />
+                                <img src="https://eatstax.com/static/front/images/delivery/Delivery.png" alt='vehicle Iconb' />
                             </div>
                         </label>
                     </div>
@@ -233,7 +239,35 @@ function Port() {
     </div>
     return element;
 }
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { hasError: false };
+    }
+  
+    static getDerivedStateFromError(error) {
+      // Update state so the next render will show the fallback UI.
+      console.log(error);
+      console.log(this.state.hasError);
 
+      return { hasError: true };
+    }
+  
+    componentDidCatch(error, errorInfo) {
+      // You can also log the error to an error reporting service
+      console.log(error, errorInfo);
+      console.log('fgdfg');
+    }
+  
+    render() {
+      if (this.state.hasError) {
+        // You can render any custom fallback UI
+        return <h1>Something went wrong.</h1>;
+      }
+  
+      return this.props.children; 
+    }
+  }
 
 function Header() {
     let expand = 'null';
@@ -248,11 +282,15 @@ function Header() {
             {expand}
             {/* <Port /> */}
             <div id='snackbar'></div>
+            <ErrorBoundary>
             <div className='row marginZero '>
                 <MainHeader />
                 <SubHeader backgroun={oneq} />
                 {/* {HigherOrderComponent()} */}
-            </div>
+   
+         </div>
+  
+</ErrorBoundary>
         </Fragment>
     )
 }
