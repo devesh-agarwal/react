@@ -9,15 +9,14 @@ function Router() {
     const element = (
         <BrowserRouter>
             <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-
-                <Route exact path="/" component={CardsMenu} />
-                <Route  path='/modern-menu' component={ModernMenu} />
-                <Route   path="/cards-menu" component={CardsMenu} />
-                <Route   path="/standard-menu" component={StandardMenu} />
-                <Route   path="/about" component={About} />
+                <Switch>
+                    <Route exact path="/" component={CardsMenu} />
+                    <Route path='/modern-menu' component={ModernMenu} />
+                    <Route path="/cards-menu" component={CardsMenu} />
+                    <Route path="/standard-menu" component={StandardMenu} />
+                    <Route path="/about" component={About} />
                 </Switch></Suspense>
-            </BrowserRouter>
+        </BrowserRouter>
     )
     return element;
 }

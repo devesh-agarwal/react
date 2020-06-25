@@ -9,7 +9,7 @@ import  Header  from '../Header/Header';
 export class ItemList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { show: true, a: 0 };
+        this.state = { show: true, totalAmount: 0 };
         this.buy = this.buy.bind(this);
     }
     selectedItem = React.createRef();
@@ -17,7 +17,7 @@ export class ItemList extends React.Component {
     buy = (e) => {
         let b = JSON.parse(e.currentTarget.value).amount;
         this.setState(() => ({
-            a: this.state.a + b
+            totalAmount: this.state.totalAmount + b
         }));
         Port();
     }
@@ -45,7 +45,7 @@ export class ItemList extends React.Component {
         return (
             <Fragment>
                 {this.listItems}
-                {this.state.a}
+                {this.state.totalAmount}
             </Fragment>
         )
     }

@@ -46,8 +46,8 @@ class ExpandCurbSide extends React.Component {
             <Fragment>
                 <h3>CurbSide</h3>
                 <form onSubmit={this.submit}>
-                    <input className="form-control" aria-label="With textarea" placeholder='PickUp Name' type='text' ref={this.pickupName} onChange={this.submit} />
-                    <input style={{ marginTop: '3px' }} className="form-control" aria-label="With textarea" placeholder='Vehicle' type='text' ref={this.vehicle} onChange={this.submit} />
+                    <input className="form-control" ref={this.pickupName} onChange={this.submit} aria-label="With textarea" placeholder='PickUp Name' type='text'  />
+                    <input className="form-control"  ref={this.vehicle} onChange={this.submit}  aria-label="With textarea" style={{ marginTop: '3px' }} placeholder='Vehicle' type='text' />
                     <SampleButton ref={this.ref} />
                 </form>
             </Fragment>
@@ -63,20 +63,18 @@ class ExpandDelivery extends React.Component {
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
+        this .state = {address:''}
     }
-
-    address = React.createRef();
     submit(event) {
-        console.log(this.address.current.value);
-        this.address.current.focus();
-        event.preventDefault();
+        this.setState({address:event.target.value});
+        console.log(this.state.address);
     }
     render() {
         return (
             <Fragment>
                 <form onSubmit={this.submit}>
                     <h3 className={ThemeContext._currentValue}>Delivery{console.log(ThemeContext)}  </h3>
-                    <textarea className="form-control" aria-label="With textarea" placeholder='Address' type='text' ref={this.address} onChange={this.submit}></textarea>
+                    <textarea className="form-control" address={this.state.address} onChange={this.submit} aria-label="With textarea" placeholder='Address' type='text' ></textarea>
                 </form>
             </Fragment>
         )
@@ -84,19 +82,19 @@ class ExpandDelivery extends React.Component {
 }
 
 function Expandable(props) {
-    let one;
+    let value;
     let expand = props.expand;
     if (expand === 'curbside') {
-        one = <ExpandCurbSide />
+        value = <ExpandCurbSide />
     }
     else if (expand === 'delivery') {
-        one = <ExpandDelivery />
+        value = <ExpandDelivery />
     }
-    else one = null;
+    else value = null;
 
     return (
         <div className='expandable'>
-            {one}
+            {value}
         </div>
     )
 }
@@ -200,19 +198,12 @@ function SnackBarr(props) {
         <div className='snackbar'><span>Order Type updated <svg style={{ top: -3, position: 'relative' }} className="bi bi-bag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
             <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-        </svg>.</span><br /> Order type is successfully changed to {props.expand}.<br />
+        </svg>.</span><br /><p> Order type is successfully changed to {props.expand}.</p><br />
         </div>
     </Portal>
     return element;
 }
-const HigherOrderComponent = (SubHeader) => {
-    class HOC extends React.Component {
-        render() {
-            return <SubHeader />;
-        }
-    }
-    return HOC;
-};
+
 function Tost() {
     const element = (<Toast>
         <Toast.Header>
@@ -291,6 +282,7 @@ function Port() {
 //       return this.props.children; 
 //     }
 //   }
+
 function Example(props) {
     const [count, setCount] = useState(3);
     const [count1, setCount1] = useState(null);
@@ -318,7 +310,6 @@ function Username(props) {
     return (
         <>
             <div>{props.children}</div>
-            <div>{props.children}</div>
         </>
     )
 }
@@ -335,6 +326,15 @@ function hoc(WrappedComponent) {
 }
 const UpperCaseUsername = hoc(Username)
 const LowerCaseUsername = hoc(Username)
+
+const HigherOrderComponent = (SubHeader) => {
+    class HOC extends React.Component {
+        render() {
+            return <SubHeader />;
+        }
+    }
+    return HOC;
+};
 function Header() {
     let picture = 'null';
     let oneq = 'headerDiv'
