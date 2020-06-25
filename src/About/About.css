@@ -1,0 +1,8 @@
+
+.commanAboutbox{
+    text-align: center;
+    padding: 20px ;
+    border: 1px solid rgb(221, 221, 221);
+    box-shadow: grey 0px -1px 25px;
+    margin: 15px;
+}

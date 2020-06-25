@@ -45,8 +45,8 @@ function About() {
 }
 export function CommonAbout() {
     const element = (
-        <div style={{textAlign:'center', padding:'5px 20px 20px 20px', border:' 1px solid #ddd', boxShadow: '0 -1px 25px grey', margin: '15px'}}>
-            <h3>
+        <div className='commanAboutbox'>
+            <h3 style={{fontStyle: 'italic', marginBottom: 15}}>
                 About Alpaca Chicken
         </h3>
             <p style={{margin: '0 0 10px'}}>
@@ -59,6 +59,7 @@ export function CommonAbout() {
                 Alpaca Peruvian Charcoal Chicken also does take-out as well as large parties and catering.
 
         </p>
+        <br/>
         <p>© 2020 Alpaca Chicken. Made in NC</p>
         </div>
     )

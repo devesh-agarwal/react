@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState, useEffect } from 'react';
+import React, { Fragment, useContext, useState, useEffect, forwardRef } from 'react';
 import './Header.css';
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -28,17 +28,19 @@ class ExpandCurbSide extends React.Component {
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
-
     }
-
     pickupName = React.createRef();
     vehicle = React.createRef();
+    a;
     submit(event) {
-
         console.log(this.pickupName.current.value);
+        console.log(this.ref.current.value);
         console.log(this.vehicle.current.value);
         event.preventDefault();
+        console.log(this.ref);
     }
+    ref = React.createRef();
+    
     render() {
         return (
             <Fragment>
@@ -46,12 +48,16 @@ class ExpandCurbSide extends React.Component {
                 <form onSubmit={this.submit}>
                     <input className="form-control" aria-label="With textarea" placeholder='PickUp Name' type='text' ref={this.pickupName} onChange={this.submit} />
                     <input style={{ marginTop: '3px' }} className="form-control" aria-label="With textarea" placeholder='Vehicle' type='text' ref={this.vehicle} onChange={this.submit} />
+                    <SampleButton ref={this.ref} />
                 </form>
-
             </Fragment>
         )
     }
 }
+
+const SampleButton = React.forwardRef((props, ref) => (
+    <input ref={ref} className="button" />
+));
 
 class ExpandDelivery extends React.Component {
     constructor(props) {
@@ -62,6 +68,7 @@ class ExpandDelivery extends React.Component {
     address = React.createRef();
     submit(event) {
         console.log(this.address.current.value);
+        this.address.current.focus();
         event.preventDefault();
     }
     render() {
@@ -97,8 +104,10 @@ function Expandable(props) {
 class SubHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { error: null, isActive: 'none', a: 'SubHeaderLabel col', b: 'SubHeaderLabel col', 
-                       c: 'SubHeaderLabel col', expand: '', sanckbarr : null };
+        this.state = {
+            error: null, isActive: 'none', a: 'SubHeaderLabel col', b: 'SubHeaderLabel col',
+            c: 'SubHeaderLabel col', expand: '', sanckbarr: null
+        };
         this.handleClick = this.handleClick.bind(this);
     }
     portal = <Port />
@@ -111,30 +120,49 @@ class SubHeader extends React.Component {
 
         }));
         if (event.currentTarget.id === 'a') {
-            this.setState( {
+            this.setState({
                 a: 'SubHeaderLabelToggle col',
                 expand: 'take away',
-                sanckbarr : <SnackBarr expand='take away' />
+                sanckbarr: <SnackBarr expand='take away' />
             });
         } if (event.currentTarget.id === 'b') {
             this.setState({
                 b: 'SubHeaderLabelToggle col',
                 expand: 'curbside',
-                sanckbarr : <SnackBarr expand='Curbside' />
+                sanckbarr: <SnackBarr expand='curbside' />
             });
 
         } if (event.currentTarget.id === 'c') {
-            this.setState( {
+            this.setState({
                 c: 'SubHeaderLabelToggle col',
                 expand: 'delivery',
-                sanckbarr : <SnackBarr expand='Take away' />
+                sanckbarr: <SnackBarr expand='delivery' />
             });
         }
-        setTimeout(()=>{
-            this.setState( {sanckbarr: null}  )}, 2000)
-        }
-        componentDidUpdate() {
-                                }
+        setTimeout(() => {
+            this.setState({ sanckbarr: null })
+        }, 2000);
+        
+    }
+    componentDidUpdate() {
+    }
+     Port() {
+         console.log(3);
+        const element = <div id='snackbar'>
+            <PortalWithState closeOnOutsideClick closeOnEsc>
+                {({ openPortal, closePortal, isOpen, portal }) => (
+                    <Fragment>
+                        <button onClick={openPortal}>
+                            Open Portal
+                        </button>
+                        {portal(
+                            <SnackBarr expand='eff' />)}
+                    </Fragment>
+                )}
+            </PortalWithState>
+        </div>
+        return element;
+    }
     render() {
         return (
             <Fragment>
@@ -144,7 +172,7 @@ class SubHeader extends React.Component {
                         <label className='noMargin'>
                             <div id='a' onClick={this.handleClick} className={this.state.a}>
                                 <p>Takeout</p>
-                                <img onClick={Port} src="https://eatstax.com/static/front/images/delivery/Take_away.png" alt='Food packet Icon'/>
+                                <img onClick={Port} src="https://eatstax.com/static/front/images/delivery/Take_away.png" alt='Food packet Icon' />
                             </div>
                         </label>
                         <label>
@@ -239,7 +267,7 @@ function Port() {
 //       super(props);
 //       this.state = { hasError: false };
 //     }
-  
+
 //     static getDerivedStateFromError(error) {
 //       // Update state so the next render will show the fallback UI.
 //       console.log(error);
@@ -247,45 +275,66 @@ function Port() {
 
 //       return { hasError: true };
 //     }
-  
+
 //     componentDidCatch(error, errorInfo) {
 //       // You can also log the error to an error reporting service
 //       console.log(error, errorInfo);
 //       console.log('fgdfg');
 //     }
-  
+
 //     render() {
 //       if (this.state.hasError) {
 //         // You can render any custom fallback UI
 //         return <h1>Something went wrong.</h1>;
 //       }
-  
+
 //       return this.props.children; 
 //     }
 //   }
-  function Example(props) {
+function Example(props) {
     const [count, setCount] = useState(3);
     const [count1, setCount1] = useState(null);
     const [count2, setCount2] = useState([{ text: 'Learn Hooks' }]);
-function  opena() {
-    if(true){
-        setCount1(<SnackBarr expand='fdgdfg' />);
+    function opena() {
+        if (true) {
+            setCount1(<SnackBarr expand='fdgdfg' />);
+        }
     }
-  }
-  useEffect(() => {
-    setTimeout(()=>{ setCount1(null)}, 3000);   
-  });
-     return (
-      <div>
-        <p>You clicked {count} times</p>
-        <p>You clicked {count1} times</p>
-        <p>You clicked {count2.text} times</p>
-        <button onClick={opena}>
-          Click me
+    useEffect(() => {
+        setTimeout(() => { setCount1(null) }, 300000);
+    });
+    return (
+        <div>
+            <p>You clicked {count} times</p>
+            <p>You clicked {count1} times</p>
+            <p>You clicked {count2.text} times</p>
+            <button onClick={opena}>
+                Click me
         </button>
-      </div>
+        </div>
     );
-  }
+}
+function Username(props) {
+    return (
+        <>
+            <div>{props.children}</div>
+            <div>{props.children}</div>
+        </>
+    )
+}
+function hoc(WrappedComponent) {
+    return (props) => {
+        return (
+            <div>
+                <WrappedComponent {...props}>
+                    {props.children.toUpperCase()}
+                </WrappedComponent>
+            </div>
+        )
+    }
+}
+const UpperCaseUsername = hoc(Username)
+const LowerCaseUsername = hoc(Username)
 function Header() {
     let picture = 'null';
     let oneq = 'headerDiv'
@@ -297,15 +346,18 @@ function Header() {
     return (
         <Fragment>
             {picture}
-            {/* <Port /> */}
             <div id='snackbar'></div>
+
+            {/* <Port /> */}
             <div className='row marginZero '>
                 <MainHeader />
                 <SubHeader backgroun={oneq} />
                 {/* {HigherOrderComponent()} */}
-   {/* <Example/> */}
-         </div>
-  
+                {/* <Example/> */}
+            </div>
+            {/* <UpperCaseUsername>devesh kingsley</UpperCaseUsername>
+            <LowerCaseUsername>devesh kingsley</LowerCaseUsername> */}
+
         </Fragment>
     )
 }
