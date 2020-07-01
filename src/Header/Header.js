@@ -6,6 +6,7 @@ import Toast from 'react-bootstrap/Toast'
 import { ThemeContext } from '../App';
 import { Portal } from 'react-portal';
 import { PortalWithState } from 'react-portal';
+const ColorContext = React.createContext("yellow")
 
 class MainHeader extends React.Component {
     element =
@@ -40,14 +41,14 @@ class ExpandCurbSide extends React.Component {
         console.log(this.ref);
     }
     ref = React.createRef();
-    
+
     render() {
         return (
             <Fragment>
                 <h3>CurbSide</h3>
                 <form onSubmit={this.submit}>
-                    <input className="form-control" ref={this.pickupName} onChange={this.submit} aria-label="With textarea" placeholder='PickUp Name' type='text'  />
-                    <input className="form-control"  ref={this.vehicle} onChange={this.submit}  aria-label="With textarea" style={{ marginTop: '3px' }} placeholder='Vehicle' type='text' />
+                    <input className="form-control" ref={this.pickupName} onChange={this.submit} aria-label="With textarea" placeholder='PickUp Name' type='text' />
+                    <input className="form-control" ref={this.vehicle} onChange={this.submit} aria-label="With textarea" style={{ marginTop: '3px' }} placeholder='Vehicle' type='text' />
                     <SampleButton ref={this.ref} />
                 </form>
             </Fragment>
@@ -63,10 +64,10 @@ class ExpandDelivery extends React.Component {
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
-        this .state = {address:''}
+        this.state = { address: '' }
     }
     submit(event) {
-        this.setState({address:event.target.value});
+        this.setState({ address: event.target.value });
         console.log(this.state.address);
     }
     render() {
@@ -139,13 +140,15 @@ class SubHeader extends React.Component {
         }
         setTimeout(() => {
             this.setState({ sanckbarr: null })
-        }, 2000);
-        
-    }
+        }, 1000);
+
+    };
+    static contextType = ColorContext;
+
     componentDidUpdate() {
     }
-     Port() {
-         console.log(3);
+    Port() {
+        console.log(3);
         const element = <div id='snackbar'>
             <PortalWithState closeOnOutsideClick closeOnEsc>
                 {({ openPortal, closePortal, isOpen, portal }) => (
@@ -188,6 +191,9 @@ class SubHeader extends React.Component {
                     </div>
                 </div>
                 <Expandable expand={this.state.expand} />
+                {console.log(this.context)}
+                {console.log(ColorContext)}
+
             </Fragment>
         );
     }
@@ -198,7 +204,7 @@ function SnackBarr(props) {
         <div className='snackbar'><span>Order Type updated <svg style={{ top: -3, position: 'relative' }} className="bi bi-bag" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
             <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-        </svg>.</span><br /><p> Order type is successfully changed to {props.expand}.</p><br />
+        </svg>.</span><br /><p> Order type is successfully changed to {props.expand}.</p>
         </div>
     </Portal>
     return element;
@@ -334,7 +340,32 @@ const HigherOrderComponent = (SubHeader) => {
         }
     }
     return HOC;
+
 };
+
+class Pass extends React.Component{
+    constructor(props){
+        super(props)
+    }
+    getData(rowData){
+        console.log(rowData);
+    }
+    render(){
+        return(
+            <Onq handleClick={this.getData}/>
+        )
+    }
+}
+
+function Onq(props){
+ const abc = 'devesh'
+ const element = (<div onClick={()=>props.handleClick(abc)}>
+click    
+</div>)
+return element;
+}
+
+
 function Header() {
     let picture = 'null';
     let oneq = 'headerDiv'
@@ -345,19 +376,22 @@ function Header() {
     } else picture = null;
     return (
         <Fragment>
-            {picture}
-            <div id='snackbar'></div>
-
-            {/* <Port /> */}
-            <div className='row marginZero '>
-                <MainHeader />
-                <SubHeader backgroun={oneq} />
-                {/* {HigherOrderComponent()} */}
-                {/* <Example/> */}
-            </div>
-            {/* <UpperCaseUsername>devesh kingsley</UpperCaseUsername>
+            <ColorContext.Provider value="cogdfgdfgfntext">
+                {picture}
+                <div id='snackbar'></div>
+                {/* <Port /> */}
+                <div className='row marginZero '>
+                    <MainHeader />
+                    <hr />
+                    <SubHeader backgroun={oneq} />
+                    {/* {HigherOrderComponent()} */}
+                    {/* <Example/> */}
+                </div>
+                <Pass/>
+                {/* <UpperCaseUsername>devesh kingsley</UpperCaseUsername>
             <LowerCaseUsername>devesh kingsley</LowerCaseUsername> */}
-
+            </ColorContext.Provider>
+<Port/>
         </Fragment>
     )
 }

@@ -6,10 +6,11 @@ import Header from './Header/Header';
 import ToolBar from './ToolBar/ToolBar';
 import Router from './Router/Router';
 import {CommonAbout} from './About/About';
-
- export const ThemeContext = React.createContext('light');
+import { Provider } from 'react-redux'
+export const ThemeContext = React.createContext('light');
 function App() {
-
+    var d = new Date();
+    
     
     return (
         <Fragment>
@@ -21,6 +22,7 @@ function App() {
            </ThemeContext.Provider>
            <br/>
             <CommonAbout />
+            {JSON.stringify(d)}
         </Fragment>
     )
 }

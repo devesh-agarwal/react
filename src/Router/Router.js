@@ -10,7 +10,7 @@ function Router() {
         <BrowserRouter>
             <Suspense fallback={<div>Loading...</div>}>
                 <Switch>
-                    <Route exact path="/" component={CardsMenu} />
+                    <Route exact path="/"  ><CardsMenu/></Route>
                     <Route path='/modern-menu' component={ModernMenu} />
                     <Route path="/cards-menu" component={CardsMenu} />
                     <Route path="/standard-menu" component={StandardMenu} />

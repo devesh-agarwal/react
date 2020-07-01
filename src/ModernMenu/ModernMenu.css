@@ -48,3 +48,10 @@
     margin-bottom: 10px;
 
 }
+.dialog{
+    background-color:darkgreen;
+    margin: 7px;
+    color: #fff;
+    z-index: 1;
+    height: 400px;
+}
